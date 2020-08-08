@@ -3,7 +3,7 @@
 Explore the best way to achieve the below mock-up sing FuncUI.
 
 The view will look like:
-(https://github.com/sharp-fsh/funcui_dynamicviews/blob/master/view_template_example.png)
+![alt text](https://github.com/sharp-fsh/funcui_dynamicviews/blob/master/view_template_example.png)
 
 - Base Layer - Two Columns
     - Column 1 - Contains Two Lists
