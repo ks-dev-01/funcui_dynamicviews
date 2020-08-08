@@ -17,9 +17,9 @@ The view will look like:
     
     
        
-## Initial Questions
+## Initial Thoughts
 
-- For Base Layer, is it best to use a Grid layout with 3 columns where:
+- For Base Layer use a Grid layout with 3 columns where:
     - Column 1 holds the Lists
     - Column 2 holds a Grid Splitter
     - Column 3 holds the panels
