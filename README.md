@@ -1,6 +1,6 @@
 # Explore resizable panels in Avalonia FuncUI
 
-Explore the best way to achieve the below mock-up sing FuncUI.
+Explore the best way to achieve the below mock-up using FuncUI.
 
 The view will look like:
 ![alt text](https://github.com/sharp-fsh/funcui_dynamicviews/blob/master/view_template_example.png)
