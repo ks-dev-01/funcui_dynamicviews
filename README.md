@@ -1,9 +1,9 @@
-# Using Avalonia FuncUI to create resizable panels
+# Explore resizable panels in Avalonia FuncUI
 
 Looks at using FuncUI to create a screen with resizable views and scroll bars.
 
 The view will look like:
-![alt text](https://github.com/sharp-fsh/funcui_dynamicviews/blob/master/view_template_example.png) "Screen Example Image"
+(https://github.com/sharp-fsh/funcui_dynamicviews/blob/master/view_template_example.png)
 
 - Base Layer - Two Columns
     - Column 1 - Contains Two Lists
