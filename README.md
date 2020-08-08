@@ -13,6 +13,6 @@ The view will look like:
         - Each panel can have a list of items
         - If the list of items exceeds the panel size it will have a scroll bar
         - When the a panel is resized - the entire are is resized
-    - Between these columns will be a Vertical Splitter that can be drag horzontially, changing the sizes of Column 1 and Column 2
+    - Between these columns will be a splitter that can be drag left and right, changing the sizes of Column 1 and Column 2
 
 
