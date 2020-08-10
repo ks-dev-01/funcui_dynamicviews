@@ -54,9 +54,9 @@ module Counter =
                 )
             ]
 
-    let verticalScrollerWithItems gridPostion items =
+    let verticalScrollerWithItems gridPosition items =
         ScrollViewer.create     [
-            gridPostion
+            gridPosition
             ScrollViewer.verticalScrollBarVisibility ScrollBarVisibility.Auto
             ScrollViewer.content (             
                genericListBox items
