@@ -63,15 +63,6 @@ module Counter =
             )
         ]
 
-    let verticalStackPanelWithItems gridPostion items =
-        StackPanel.create [
-            gridPostion
-            StackPanel.orientation Orientation.Vertical
-            StackPanel.children [
-                genericListBox items
-            ]
-        ]
-
     let view (state: State) (dispatch) =
         Grid.create [
             Grid.rowDefinitions "35, 1*, 5, 4*"
