@@ -48,13 +48,13 @@ module Counter =
             StackPanel.children [
                 Button.create [
                     Button.content "Change Lists"
-                    Button.width 50.
+                    Button.width 120.
                     Button.height 35.
                     Button.onClick (fun _ -> dispatch ChangeItems)
                 ]
                 Button.create [
                     Button.content "Change Row Definitions"
-                    Button.width 50.
+                    Button.width 120.
                     Button.height 35.
                     Button.onClick (fun _ -> dispatch ChangeGridRowDefsButton)
                 ]
