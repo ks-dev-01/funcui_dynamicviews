@@ -15,7 +15,11 @@ The view will look like:
     - Between these Column 1 and 2 will be a splitter that can be dragged left and right, changing the sizes of Column 1 and Column 2
     - Also allow the View State to be saved - so all resizable values will be stored in state (which would later be saved in a database)
     
-    
+## Attempt 1
+
+Used a Grid Layout for the first component - Two Vertical Lists in one column.
+Initially this worked and the Grid Splitter would move the other two cells, and the scrollbars would react.
+But when the data in the lists change the Grid Splitter function no longer works.
        
 ## Initial Thoughts
 
