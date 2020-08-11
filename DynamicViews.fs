@@ -14,6 +14,10 @@ module Counter =
     | Not
     | Dragging
 
+    type CurrentView =
+    | CustomSplitter
+    | GridSplitter
+
     type State = { 
         ListOneItems : string list 
         ListTwoItems : string list 
@@ -21,7 +25,8 @@ module Counter =
         DragState : DragState 
         OldDragPoint : Point option
         RowDef1 : float
-        RowDef2 : float }
+        RowDef2 : float 
+        CurrentView : CurrentView}
 
     let generateStrings total word = 
         [
@@ -32,29 +37,36 @@ module Counter =
     let rowDefinition1 = "35, 100*, 5, 400*"
     let rowDefinition2 = "35, 300*, 5, 400*"
     
+    let listViewA1 = generateStrings 20 "List A V1" 
+    let listViewB1 = generateStrings 30 "List B V1" 
+
+    let listViewA2 = generateStrings 5 "List A V2" 
+    let listViewB2 = generateStrings 15 "List B V2" 
+
     let init = { 
-        ListOneItems = generateStrings 20 "List One" 
-        ListTwoItems = generateStrings 30 "List Two" 
+        ListOneItems = listViewA1
+        ListTwoItems = listViewB1
         RowDefs = rowDefinition1
         DragState = Not
         OldDragPoint = None
         RowDef1 = 100.
         RowDef2 = 400.
+        CurrentView = GridSplitter
     }
 
     type Msg = 
     | ChangeItems
     | ChangeGridRowDefsButton
     | GridRowDefinitionsChanged of string
-    | Nothing
+    | ToggleCustomOrGridView
     | CustomSplitterDragStart of PointerPressedEventArgs
     | CustomSplitterDragDelta of PointerEventArgs
     | CustomSplitterDragEnd of PointerReleasedEventArgs
 
     let update (msg: Msg) (state: State) : State =
         match msg with
-        | ChangeItems -> { state with ListOneItems = generateStrings 5 "Update List One"
-                                      ListTwoItems = generateStrings 15 "Update List Two" }
+        | ChangeItems -> { state with ListOneItems = if state.ListOneItems = listViewA1 then listViewA2 else listViewA1
+                                      ListTwoItems = if state.ListTwoItems = listViewB1 then listViewB2 else listViewB1}
         | ChangeGridRowDefsButton -> if state.RowDefs = rowDefinition2 then { state with RowDefs = rowDefinition1 } else { state with RowDefs = rowDefinition2 }
         | GridRowDefinitionsChanged stringDef -> state //{ state with RowDefs = stringDef }
         | CustomSplitterDragStart event -> { state with DragState = Dragging }
@@ -74,9 +86,10 @@ module Counter =
                     let newRowDef2 = state.RowDef2 - dY
 
                     let rowDefs = sprintf "35, %f*, 5, %f*" newRowDef1 newRowDef2
+                    printfn "RowDefs: %A" rowDefs
                     { state with OldDragPoint = Some newPoint; RowDef1 = newRowDef1; RowDef2 = newRowDef2; RowDefs = rowDefs }
         | CustomSplitterDragEnd event -> { state with DragState = Not }
-        | Nothing -> state
+        | ToggleCustomOrGridView -> { state with CurrentView =  if state.CurrentView = GridSplitter then  CustomSplitter else GridSplitter }
     
     let buttonPanel gridPosition dispatch = 
         StackPanel.create [
@@ -94,6 +107,12 @@ module Counter =
                     Button.width 120.
                     Button.height 35.
                     Button.onClick (fun _ -> dispatch ChangeGridRowDefsButton)
+                ]
+                Button.create [
+                    Button.content "Toggle View"
+                    Button.width 120.
+                    Button.height 35.
+                    Button.onClick (fun _ -> dispatch ToggleCustomOrGridView)
                 ]
             ]
         ]
@@ -135,7 +154,12 @@ module Counter =
                 GridSplitter.horizontalAlignment HorizontalAlignment.Stretch 
                 GridSplitter.onDragDelta (fun e ->
                     try 
+                        //let newPoint = (e.GetPosition ((event.Source :?> IVisual)))
+                        let n = e.Vector
+                        printfn "New Point: %A" n
+                        printfn "New Point Y: %A" n.Y
                         let source = (e.Source :?> Control)
+                        let f = (e.Source :?> GridSplitter)
                         let parent = source.Parent
                         let parentAsGrid = parent :?> Grid
                         let rowDefs = parentAsGrid.RowDefinitions
@@ -159,7 +183,7 @@ module Counter =
                             [ for rowDef in rowDefs do
                                 sprintf "%A" rowDef.Height
                             ] |> String.concat ","
-                        printfn "RowDefs: %A" stringDef
+                        //printfn "Complte RowDefs: %A" stringDef
                         (dispatch (GridRowDefinitionsChanged stringDef))
                     with ex ->
                         printfn "Error: %A" ex
@@ -173,8 +197,9 @@ module Counter =
             Grid.children [
                 buttonPanel (Grid.row 0) dispatch
                 verticalScrollerWithItems (Grid.row 1) state.ListOneItems
-                //gridSplitterComponent (Grid.row 2) dispatch
-                customSplitter (Grid.row 2) dispatch
+                match state.CurrentView with
+                | GridSplitter -> gridSplitterComponent (Grid.row 2) dispatch
+                | CustomSplitter -> customSplitter (Grid.row 2) dispatch
                 verticalScrollerWithItems (Grid.row 3) state.ListTwoItems
             ]
         ]
