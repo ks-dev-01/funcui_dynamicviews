@@ -20,7 +20,13 @@ The view will look like:
 Used a Grid Layout for the first component - Two Vertical Lists in one column.
 Initially this worked and the Grid Splitter would move the other two cells, and the scrollbars would react.
 But when the data in the lists change the Grid Splitter function no longer works.
-       
+
+**COULD NOT GET THIS TO WORK**
+
+## Attempt 2
+Custom Splitter. Use a control with drag and drop events that track position and change row definitions when mouse moves.
+This currently works - need to work on making the drag feel smoother - get the delta right.
+
 ## Initial Thoughts
 
 - For Base Layer use a Grid layout with 3 columns where:
