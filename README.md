@@ -27,6 +27,7 @@ But when the data in the lists change the Grid Splitter function no longer works
 Custom Splitter. Use a control with drag and drop events that track position and change row definitions when mouse moves.
 This currently works - need to work on making the drag feel smoother - get the delta right.
 
+Broken - Doesn't work when I resize the screen.
 ## Initial Thoughts
 
 - For Base Layer use a Grid layout with 3 columns where:
