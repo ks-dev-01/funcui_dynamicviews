@@ -36,7 +36,7 @@ This currently works - need to work on making the drag feel smoother - get the d
     
 - What would be the best columnDefinitions for the Base Layer Grid?
     - Dynamic values:
-        - 0.4*, 0.09 (GridSplitter), 0.6*
+        - 200*, 5 (GridSplitter), 300*
     - Or should the be pixel widths?
         - 400, 5, 600
 - How does the GridSplitter work? Would it work in FuncUI & Elmish?
